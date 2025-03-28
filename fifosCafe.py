@@ -7,14 +7,19 @@ def empty(): #check if the queue is empty
         return True
     else:
         return False
-def top(): #look at top item
+def front(): #look at top item
     if empty():
         return None
     else:
         return myQueue[0]
-def push(data): #add data to queue
+def rear(): #look at the bottom item
+    if empty():
+        return None
+    else:
+        return myQueue[len(myQueue)-1]
+def enqueue(data): #add data to queue
     myQueue.append(data)
-def pop(): #remove top item
+def dequeue(): #remove top item
     myQueue.pop(0)
 
 def takeOrder():
@@ -23,7 +28,7 @@ def takeOrder():
     global waiting
     ordered=input("Welcome to the Fifo's Cafe! May I take your order? ")
     customername=input("Alright! Can I get a name for this order? ")
-    push([customername,ordered]) #add customer to queue
+    enqueue([customername,ordered]) #add customer to queue
     waiting+=1 #update length
     print("Thank you! Your order will be finished soon. Your order number is ", served+1,".", sep="")
 def doneOrder():
@@ -34,7 +39,7 @@ def doneOrder():
     waiting-=1 #update length
     ordered=myQueue[0]
     print("Order #",served,", ",ordered[1]," for ",ordered[0],"!",sep="") #announce order
-    pop() #remove customer from queue
+    dequeue() #remove customer from queue
     print("Thank you for coming to Fifo's Cafe! Have an orderly day!")
 def Cafe(): #Menu screen
     print("")
