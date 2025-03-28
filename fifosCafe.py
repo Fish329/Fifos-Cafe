@@ -20,7 +20,7 @@ def rear(): #look at the bottom item
 def enqueue(data): #add data to queue
     myQueue.append(data)
 def dequeue(): #remove top item
-    myQueue.pop(0)
+    myQueue.pop(len(myQueue)-1)
 
 def takeOrder():
     print("")
