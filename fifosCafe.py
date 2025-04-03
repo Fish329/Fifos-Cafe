@@ -24,7 +24,7 @@ def dequeue(): #remove top item
 
 def takeOrder(served,waiting):
     print("")
-    ordered=input("Welcome to the Fifo's Cafe! May I take your order? ")
+    ordered=input("Welcome to the Fifo's Cafe! What would you like to order? (Enter only the name of the item) ")
     customername=input("Alright! Can I get a name for this order? ")
     enqueue([customername,ordered]) #add customer to queue
     waiting+=1 #update length
