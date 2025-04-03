@@ -20,28 +20,26 @@ def rear(): #look at the bottom item
 def enqueue(data): #add data to queue
     myQueue.append(data)
 def dequeue(): #remove top item
-    myQueue.pop(len(myQueue)-1)
+    myQueue.pop(0)
 
-def takeOrder():
+def takeOrder(served,waiting):
     print("")
-    global served
-    global waiting
     ordered=input("Welcome to the Fifo's Cafe! May I take your order? ")
     customername=input("Alright! Can I get a name for this order? ")
     enqueue([customername,ordered]) #add customer to queue
     waiting+=1 #update length
-    print("Thank you! Your order will be finished soon. Your order number is ", served+1,".", sep="")
-def doneOrder():
+    print("Thank you! Your order will be finished soon.")
+    Cafe(served,waiting)
+def doneOrder(served,waiting):
     print("")
-    global served
-    global waiting
     served+=1 #update statistic
     waiting-=1 #update length
     ordered=myQueue[0]
     print("Order #",served,", ",ordered[1]," for ",ordered[0],"!",sep="") #announce order
     dequeue() #remove customer from queue
     print("Thank you for coming to Fifo's Cafe! Have an orderly day!")
-def Cafe(): #Menu screen
+    Cafe(served,waiting)
+def Cafe(served,waiting): #Menu screen
     print("")
     print("#FIFO'S CAFE#")
     print("-=(",served,"served"," )=-")
@@ -54,11 +52,9 @@ def Cafe(): #Menu screen
             print("")
             choice=input("Input F when an order is finished, or input T to take a new order. Input X to exit. ")
             if choice=="F":
-                doneOrder()
-                Cafe()
+                doneOrder(served,waiting)
             elif choice=="T":
-                takeOrder()
-                Cafe()
+                takeOrder(served,waiting)
             elif choice=="X":
                 print("Thanks for coming!")
                 exit()
@@ -71,13 +67,11 @@ def Cafe(): #Menu screen
             print("")
             choice=input("Input T to take a customer's order, or input X to exit. ")
             if choice=="T":
-                takeOrder()
-                Cafe()
+                takeOrder(served,waiting)
             elif choice=="X":
                 print("Thanks for coming!")
                 exit()
             else:
                 print("ERROR: please choose from the list given.")
                 continue
-Cafe()
-            
+Cafe(served,waiting)
